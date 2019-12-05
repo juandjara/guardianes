@@ -62,7 +62,7 @@ function Post () {
           color: white;
         }
         nav,
-        :global(nav :global(.nav-root),)
+        :global(nav .nav-root),
         nav ul {
           display: flex;
         }
