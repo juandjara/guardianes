@@ -27,7 +27,7 @@ const Sections = ({ pages }) => {
 
         @media (max-width: 600px) {
           .section-img {
-            max-width: none;
+            max-width: 100%;
           }
         }
   

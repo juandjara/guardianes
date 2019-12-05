@@ -89,7 +89,7 @@ const Home = () => {
         }
   
         main, .site-logo {
-          flex: 0 0 50%;
+          flex: 1 1 auto;
           padding: 1rem;
           max-width: 50%;
         }
