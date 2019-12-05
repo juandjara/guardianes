@@ -22,7 +22,13 @@ const Sections = ({ pages }) => {
         }
   
         .section-img {
-          max-width: 100%;
+          max-width: 50%;
+        }
+
+        @media (max-width: 600px) {
+          .section-img {
+            max-width: none;
+          }
         }
   
         .section-img,

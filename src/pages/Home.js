@@ -89,12 +89,9 @@ const Home = () => {
         }
   
         main, .site-logo {
-          flex: 1 1 50%;
+          flex: 0 0 50%;
           padding: 1rem;
-        }
-  
-        .site-logo {
-          max-width: 95vw;
+          max-width: 50%;
         }
   
         .cta {
@@ -134,9 +131,11 @@ const Home = () => {
         @media (max-width: 600px) {
           .site-logo {
             order: 1;
+            max-width: 95vw;
           }
           main {
             order: 2;
+            max-width: none;
           }
           .cta span {
             display: none;
