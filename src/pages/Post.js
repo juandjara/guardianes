@@ -161,13 +161,12 @@ function Posts () {
 
         .posts h2 {
           font-size: 30px;
-          margin-bottom: 0;
         }
 
         .post {
           flex: 1 1 50%;
           min-width: 320px;
-          padding: 1rem 0;
+          margin: 42px 0;
         }
 
         .post h3 {
