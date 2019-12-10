@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import api from '../../cmsapi'
 import HeadConfig from '../components/HeadConfig'
 import { Link } from '@reach/router'
@@ -128,10 +128,58 @@ nav ul li.selected {
   )
 }
 
+function FixedMenu ({ groupedPosts }) {
+  return (
+    <section className="fixed-menu">
+      {groupedPosts.map(g => (
+        <ul key={g.seccion}>
+          <h2>{g.seccion}</h2>
+          {g.posts.map(p => (
+            <li key={p.id}>
+              <a href={`#${p.id}`}>{p.titulo}</a>
+            </li>
+          ))}
+        </ul>
+      ))}
+      <style jsx>{`
+        .fixed-menu {
+          position: absolute;
+          top: 24px;
+          left: 100%;
+          width: 100%;
+          max-width: 240px;
+          padding: 0 16px;
+        }
+        @media (max-width: 1140px) {
+          .fixed-menu {
+            display: none;
+          }
+        }
+        .fixed-menu h2 {
+          margin-bottom: 12px;
+          margin-top: 2rem;
+        }
+        .fixed-menu li {
+          margin-bottom: 8px;
+        }
+        .fixed-menu a {
+          text-decoration: none;
+          color: inherit;
+        }
+        .fixed-menu a:hover {
+          text-decoration: underline;
+        }
+      `}</style>
+    </section>
+  )
+}
+
 function Posts () {
+  useEffect(() => {
+    document.documentElement.scrollTop = 0
+  }, [])
   const { sections = [], currentSection = {}, posts = [] } = useRouteData()
   const groupedPosts = groupPosts(posts)
-  console.log('grouped-posts', groupedPosts)
   return (
     <div className="page">
       <HeadConfig />
@@ -141,7 +189,7 @@ function Posts () {
           <ul key={g.seccion}>
             <h2>{g.seccion}</h2>
             {g.posts.map(p => (
-              <li className="post" key={p.id}>
+              <li className="post" id={p.id} key={p.id}>
                 <h3>{p.titulo}</h3>
                 <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
                 <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
@@ -149,6 +197,7 @@ function Posts () {
             ))}
           </ul>
         ))}
+        <FixedMenu groupedPosts={groupedPosts} />
       </div>
       <Footer></Footer>
       <style jsx>{`
@@ -179,6 +228,7 @@ function Posts () {
 
 .posts {
   flex-grow: 1;
+  position: relative;
 }
 
 .posts h2 {
