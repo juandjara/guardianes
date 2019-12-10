@@ -33,7 +33,7 @@ function Post () {
           <div className="html-content" dangerouslySetInnerHTML={{ __html: currentSection.descripcion }}></div>
         </section>
       </header>
-      <ul className="container">
+      <ul className={posts.length ? 'container card' : 'container'}>
         {posts.map(p => (
           <li key={p.id}>
             <h2>{p.titulo}</h2>
@@ -48,12 +48,15 @@ function Post () {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
+          background-color: #f8f8f8;
         }
+
         header {
           color: white;
           background: linear-gradient(120deg, #8b1f27, #c41525);
-          padding-bottom: 20px;
+          padding-bottom: 32px;
         }
+
         nav {
           padding: 1rem;
         }
@@ -109,48 +112,58 @@ function Post () {
           font-size: 2rem;
           margin: 0;
         }
+
         .site-logo {
           height: 60px;
           margin-right: 1rem;
         }
+
         .container {
           max-width: ${CONTAINER_WIDTH}px;
-          padding: 0 12px;
+          padding: 0 16px;
           margin: 0 auto;
         }
+
         .section-description h1 {
           font-size: 4rem;
-          margin: 20px 0;
+          margin: 16px 0;
         }
+
         .section-description .html-content {
           font-size: 20px;
         }
-        .page > ul.container {
-          // display: flex;
-          // flex-wrap: wrap;
-          // justify-content: space-between;
-          // align-items: flex-start; 
-          flex-grow: 1;
+
+        .card {
+          box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+          border-radius: 8px;
+          background-color: white;
         }
+        
+        .page > ul.container {
+          flex-grow: 1;
+          margin-top: -24px;
+        }
+
         .page > ul > li {
           flex: 1 1 50%;
           min-width: 320px;
           padding: 1rem 0;
         }
-        // li + li {
-        //   padding-left: 2rem;
-        // }
+
         .page > ul > li h2 {
           margin-bottom: 1rem;
         }
+
         .page > ul > li .html-content {
           line-height: 1.6;
         }
+
         .tags span {
           background-color: #eee;
           padding: 4px 8px;
           border-radius: 4px;
         }
+
         .tags span + span {
           margin-left: 8px;
         }
