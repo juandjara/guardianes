@@ -193,6 +193,14 @@ function Posts () {
                 <h3>{p.titulo}</h3>
                 <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
                 <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
+                <p className="icons">
+                  {(p.informacion || []).map(i => (
+                    <span>
+                      <i className="material-icons">{i.icono}</i>
+                      <span>{i.texto}</span>
+                    </span>
+                  ))}
+                </p>
               </li>
             ))}
           </ul>
@@ -257,6 +265,20 @@ function Posts () {
 
 .tags span + span {
   margin-left: 8px;
+}
+
+.icons {
+  font-size: 14px;
+}
+
+.icons > span {
+  margin-right: 8px;
+}
+
+.icons .material-icons {
+  vertical-align: bottom;
+  display: inline-block;
+  margin-right: 4px;
 }
       `}</style>
     </div>

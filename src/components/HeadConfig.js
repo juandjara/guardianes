@@ -8,6 +8,7 @@ const HeadConfig = () => (
       <meta name="description" content="Eventos culturales de ocio alternativo" />
       <link rel='icon' type='image/png' href='/images/escudo-fullcolor.png'/>
       <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Bree+Serif&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     </Head>
     <style jsx global>{`
       body {
