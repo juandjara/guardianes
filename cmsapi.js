@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 export default {
-  url: 'https://cms.fuken.xyz/guardianes',
-  thumbsUrl: 'https://cms.fuken.xyz/thumbnail/guardianes',
+  url: 'https://editor.asoguardianes.com/guardianes',
+  thumbsUrl: 'https://editor.asoguardianes.com/thumbnail/guardianes',
   async getItems(collection, params) {
     const url = `${this.url}/items/${collection}?${this._paramsToText(params)}`
     const res = await axios.get(url)
