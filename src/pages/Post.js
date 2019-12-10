@@ -7,8 +7,18 @@ import { useRouteData } from 'react-static'
 
 const CONTAINER_WIDTH = 812;
 
-function Post () {
+function groupPosts (posts) {
+  const reduced = posts.reduce((acum, elem) => {
+    acum[elem.seccion] = acum[elem.seccion] || { seccion: elem.seccion, posts: [] }
+    acum[elem.seccion].posts = acum[elem.seccion].posts.concat(elem)
+    return acum
+  }, {})
+  return Object.values(reduced)
+}
+
+function Posts () {
   const { sections = [], currentSection = {}, posts = [] } = useRouteData()
+  const groupedPosts = groupPosts(posts)
   return (
     <div className="page">
       <HeadConfig />
@@ -33,15 +43,20 @@ function Post () {
           <div className="html-content" dangerouslySetInnerHTML={{ __html: currentSection.descripcion }}></div>
         </section>
       </header>
-      <ul className={posts.length ? 'container card' : 'container'}>
-        {posts.map(p => (
-          <li key={p.id}>
-            <h2>{p.titulo}</h2>
-            <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
-            <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
-          </li>
+      <div className={posts.length ? 'posts container card' : 'posts container'}>
+        {groupedPosts.map(g => (
+          <ul key={g.seccion}>
+            <h2>{g.seccion}</h2>
+            {g.posts.map(p => (
+              <li className="post" key={p.id}>
+                <h3>{p.titulo}</h3>
+                <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
+                <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
+              </li>
+            ))}
+          </ul>
         ))}
-      </ul>
+      </div>
       <Footer></Footer>
       <style jsx>{`
         .page {
@@ -139,22 +154,27 @@ function Post () {
           background-color: white;
         }
         
-        .page > ul.container {
+        .posts {
           flex-grow: 1;
           margin-top: -24px;
         }
 
-        .page > ul > li {
+        .posts h2 {
+          font-size: 30px;
+          margin-bottom: 0;
+        }
+
+        .post {
           flex: 1 1 50%;
           min-width: 320px;
           padding: 1rem 0;
         }
 
-        .page > ul > li h2 {
-          margin-bottom: 1rem;
+        .post h3 {
+          font-size: 20px;
         }
 
-        .page > ul > li .html-content {
+        .post .html-content {
           line-height: 1.6;
         }
 
@@ -172,4 +192,4 @@ function Post () {
   )
 }
 
-export default Post
+export default Posts
