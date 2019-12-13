@@ -189,18 +189,23 @@ function Posts () {
           <ul key={g.seccion}>
             <h2>{g.seccion}</h2>
             {g.posts.map(p => (
-              <li className="post" id={p.id} key={p.id}>
-                <h3>{p.titulo}</h3>
-                <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
-                <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
-                <p className="icons">
-                  {(p.informacion || []).map(i => (
-                    <span>
-                      <i className="material-icons">{i.icono}</i>
-                      <span>{i.texto}</span>
-                    </span>
-                  ))}
-                </p>
+              <li className="post" id={p.id} key={p.id} style={{
+                display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between'
+              }}>
+                <div>
+                  <h3>{p.titulo}</h3>
+                  <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
+                  <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
+                  <p className="icons">
+                    {(p.informacion || []).map(i => (
+                      <span key={i.icono}>
+                        <i className="material-icons">{i.icono}</i>
+                        <span>{i.texto}</span>
+                      </span>
+                    ))}
+                  </p>
+                </div>
+                <img style={{ flex: '0 0 auto', marginLeft: 8, borderRadius: 4, display: 'block' }} src={p.imagen && `${api.thumbsUrl}/200/200/crop/good/${p.imagen.filename}`} />
               </li>
             ))}
           </ul>
@@ -244,13 +249,13 @@ function Posts () {
 }
 
 .post {
-  flex: 1 1 50%;
   min-width: 320px;
-  margin: 42px 0;
+  margin-bottom: 32px;
 }
 
 .post h3 {
   font-size: 20px;
+  margin-top: 0;
 }
 
 .post .html-content {
@@ -272,7 +277,7 @@ function Posts () {
 }
 
 .icons > span {
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
 .icons .material-icons {

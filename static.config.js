@@ -1,10 +1,9 @@
-// import path from 'path'
 import api from './cmsapi'
 
 export default {
   getRoutes: async () => {
     const sections = await api.getItems('grupos_de_trabajo', { fields: 'id,titulo,descripcion,icono.filename,imagen.data' })
-    const posts = await api.getItems('actividades')
+    const posts = await api.getItems('actividades', { fields: '*,imagen.filename' })
 
     return [
       {
@@ -21,7 +20,7 @@ export default {
           getData: () => ({
             sections,
             currentSection: section,
-            posts: posts.filter(p => p.grupo_de_trabajo === section.id)
+            posts: posts.filter(p => p.grupo_de_trabajo.id === section.id)
           })
         }))
       }
