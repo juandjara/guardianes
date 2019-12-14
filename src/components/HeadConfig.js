@@ -7,17 +7,20 @@ const HeadConfig = () => (
       <title>Asociación Guardianes</title>
       <meta name="description" content="Eventos culturales de ocio alternativo" />
       <link rel='icon' type='image/png' href='/images/escudo-fullcolor.png'/>
-      <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Bree+Serif&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Lato&display=swap" rel="stylesheet" />
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     </Head>
     <style jsx global>{`
       body {
         margin: 0;
         color: #333;
-        font-family: 'Alegreya Sans', -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
+        font-family: 'Lato', -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
       }
       html, body {
         scroll-behavior: smooth;
+      }
+      .display-font {
+        font-family: 'Bree Serif', serif;
       }
       * {
         box-sizing: border-box;
@@ -31,7 +34,6 @@ const HeadConfig = () => (
         padding: 0;
       }
       .html-content {
-        font-family: Georgia, serif;
         line-height: 1.5;
       }
     `}</style>

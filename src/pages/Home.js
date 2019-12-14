@@ -14,7 +14,7 @@ const Home = () => {
       <Social className="social-top" />
       <div className="landing-section">
         <main>
-          <header>
+          <header className="display-font">
             <h1 className='title'>Asociación Guardianes</h1>
             <p className='description'>
               Eventos culturales de ocio alternativo
@@ -37,7 +37,7 @@ const Home = () => {
       </div>
       <Sections pages={sections} />
       <div className="below-sections">
-        <p className="more">Pero aún hacemos más cosas...</p>
+        <p className="more display-font">Pero aún hacemos más cosas...</p>
         <p>¿Quieres saber más?</p>
         <div className="cta">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfl-4GADkcibRnVLn7jKeGfjrSvZmuHe32QWaY3YbTV-9VW5g/viewform?c=0&w=1">
@@ -73,7 +73,6 @@ const Home = () => {
   
         header {
           text-align: center;
-          font-family: 'Bree Serif', serif;
         }
   
         header .title {
@@ -155,7 +154,6 @@ const Home = () => {
         .more {
           font-size: 48px;
           font-style: italic;
-          font-family: 'Bree Serif', serif;
         }
   
         .more + p {
