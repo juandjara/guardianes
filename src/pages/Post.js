@@ -189,9 +189,7 @@ function Posts () {
           <ul key={g.seccion}>
             <h2>{g.seccion}</h2>
             {g.posts.map(p => (
-              <li className="post" id={p.id} key={p.id} style={{
-                display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between'
-              }}>
+              <li className="post" id={p.id} key={p.id}>
                 <div>
                   <h3>{p.titulo}</h3>
                   <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
@@ -205,7 +203,7 @@ function Posts () {
                     ))}
                   </p>
                 </div>
-                <img style={{ flex: '0 0 auto', marginLeft: 8, borderRadius: 4, display: 'block' }} src={p.imagen && `${api.thumbsUrl}/200/200/crop/good/${p.imagen.filename}`} />
+                <img src={p.imagen && `${api.thumbsUrl}/200/200/crop/good/${p.imagen.filename}`} />
               </li>
             ))}
           </ul>
@@ -251,6 +249,9 @@ function Posts () {
 .post {
   min-width: 320px;
   margin-bottom: 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .post h3 {
@@ -260,6 +261,22 @@ function Posts () {
 
 .post .html-content {
   line-height: 1.6;
+}
+
+.post img {
+  flex: 0 0 auto;
+  margin-left: 8;
+  border-radius: 4;
+  display: block;
+}
+
+@media (max-width: ${CONTAINER_WIDTH}px) {
+  .post {
+    flex-direction: column-reverse;
+  }
+  .post img {
+    margin: 8px auto;
+  }
 }
 
 .tags span {
