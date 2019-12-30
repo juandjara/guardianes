@@ -28,7 +28,7 @@ function PostsHeader ({ sections, currentSection }) {
           {sections.map(s => (
             <li key={s.id} className={s.id === currentSection.id ? 'selected' : ''}>
               <Link to={`/${s.id}`}>
-                <img src={s.icono && `${api.thumbsUrl}/200/200/crop/good/${s.icono.filename}`} />
+                <img src={s.icono && api.makeImageUrl(s.icono, 'thumbnail')} />
               </Link>
             </li>
           ))}
@@ -203,7 +203,7 @@ function Posts () {
                     ))}
                   </p>
                 </div>
-                <img src={p.imagen && `${api.thumbsUrl}/200/200/crop/good/${p.imagen.filename}`} />
+                <img src={p.imagen && api.makeImageUrl(p.imagen, 'thumbnail')} />
               </li>
             ))}
           </ul>

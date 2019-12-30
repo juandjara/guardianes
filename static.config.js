@@ -2,8 +2,8 @@ import api from './cmsapi'
 
 export default {
   getRoutes: async () => {
-    const sections = await api.getItems('grupos_de_trabajo', { fields: 'id,titulo,descripcion,icono.filename,imagen.data' })
-    const posts = await api.getItems('actividades', { fields: '*,imagen.filename' })
+    const sections = await api.getItems('grupos_de_trabajo', { fields: 'id,titulo,descripcion,icono.*,imagen.*' })
+    const posts = await api.getItems('actividades', { fields: '*,imagen.*' })
 
     return [
       {

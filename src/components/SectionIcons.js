@@ -1,5 +1,5 @@
 import React from 'react'
-import api from '../../cmsapi'
+import cmsapi from '../../cmsapi'
 
 const SectionIcons = ({ pages }) => (
   <ul className="section-icons">
@@ -46,7 +46,7 @@ const SectionIcons = ({ pages }) => (
     {pages.map(p => (
       <li key={p.id}>
         <a href={`#${p.id}`}>
-          <img src={p.icono && `${api.thumbsUrl}/200/200/crop/good/${p.icono.filename}`} />
+          <img src={p.icono && cmsapi.makeImageUrl(p.icono, 'thumbnail')} />
           <p>{p.titulo}</p>
         </a>
       </li>
