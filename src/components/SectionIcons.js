@@ -1,25 +1,23 @@
 import React from 'react'
 import cmsapi from '../../cmsapi'
+import { Link } from '@reach/router'
 
-const SectionIcons = ({ pages }) => (
-  <ul className="section-icons">
+const SectionIcons = ({ pages, className }) => (
+  <ul className={`section-icons ${className}`}>
     <style jsx>{`
       .section-icons {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 160px);
+        grid-gap: 16px 8px;
         justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 5rem;
+        align-content: center;
+        margin-top: 32px;
+        margin-bottom: 24px;
       }
 
       .section-icons li {
-        width: 125px;
         text-align: center;
         text-transform: uppercase;
-        padding:  0 1rem 1rem 1rem;
         box-sizing: content-box;
         font-size: 18px;
         letter-spacing: 1px;
@@ -27,13 +25,17 @@ const SectionIcons = ({ pages }) => (
         transition: opacity 0.25s ease;
       }
 
-      .section-icons a {
+      :global(.section-icons a) {
         text-decoration: none;
         color: inherit;
       }
 
-      .section-icons li:hover {
+      .section-icons li:hover img {
         opacity: 0.75;
+      }
+
+      :global(.section-icons li:hover a) {
+        text-decoration: underline;
       }
 
       .section-icons img {
@@ -44,11 +46,11 @@ const SectionIcons = ({ pages }) => (
       }
     `}</style>
     {pages.map(p => (
-      <li key={p.id}>
-        <a href={`#${p.id}`}>
+      <li key={p.coleccion}>
+        <Link to={`/${p.coleccion || ''}`}>
           <img src={p.icono && cmsapi.makeImageUrl(p.icono, 'thumbnail')} />
           <p>{p.titulo}</p>
-        </a>
+        </Link>
       </li>
     ))}
   </ul>

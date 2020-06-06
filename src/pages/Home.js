@@ -1,109 +1,115 @@
 import React from 'react'
-import Sections from '../components/Sections'
 import SectionIcons from '../components/SectionIcons'
 import Social from '../components/Social'
-import Footer from '../components/Footer'
-import HeadConfig from '../components/HeadConfig'
-import { useRouteData } from 'react-static'
+import { useRouteData, useSiteData } from 'react-static'
 
 const Home = () => {
-  const { sections } = useRouteData() 
+  const homeData = useSiteData()
+  const { photos, sectionsInfo } = useRouteData() 
+  const firstImg = photos.data.filter(img => (
+    img.media_type === 'IMAGE'
+  ))[4].media_url
   return (
     <div className="home">
-      <HeadConfig />
-      <Social className="social-top" />
-      <div className="landing-section">
-        <main>
+      <main>
+        <nav>
+          <img className="site-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
           <header className="display-font">
-            <h1 className='title'>Asociación Guardianes</h1>
-            <p className='description'>
-              Eventos culturales de ocio alternativo
-            </p>
+            <h1 className="title"> {homeData.titulo} </h1>
+            <p className="subtitle"> {homeData.subtitulo} </p>
           </header>
-          <SectionIcons pages={sections} />
-          <div className="cta">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfl-4GADkcibRnVLn7jKeGfjrSvZmuHe32QWaY3YbTV-9VW5g/viewform?c=0&w=1">
-              <button className="cta-btn primary">Apúntate a la asociación</button>
-            </a>
-            <span>ó</span>
-            <a href="mailto:asociacion.guardianes@gmail.com">
-              <button className="cta-btn outline">
-                Contáctanos
-              </button>
-            </a>
-          </div>
-        </main>
-        <img className="site-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
+          <Social />
+        </nav>
+        <SectionIcons pages={sectionsInfo} className="right" />
+        <section className="copy">
+          <div className="description" dangerouslySetInnerHTML={{ __html: homeData.descripcion }}></div>  
+          <p className="cta">
+            <strong className="cta-first">¿Quieres saber más?</strong>
+            <span className="cta-inner">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfl-4GADkcibRnVLn7jKeGfjrSvZmuHe32QWaY3YbTV-9VW5g/viewform?c=0&w=1">
+                <button className="cta-btn primary">Apúntate a la asociación</button>
+              </a>
+              <span className="cta-separator">ó</span>
+              <a href="mailto:asociacion.guardianes@gmail.com">
+                <button className="cta-btn outline">
+                  Contáctanos
+                </button>
+              </a>
+            </span>
+          </p>
+        </section>
+      </main>
+      <div className="carrousel">
+        <img src={firstImg} />
       </div>
-      <Sections pages={sections} />
-      <div className="below-sections">
-        <p className="more display-font">Pero aún hacemos más cosas...</p>
-        <p>¿Quieres saber más?</p>
-        <div className="cta">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfl-4GADkcibRnVLn7jKeGfjrSvZmuHe32QWaY3YbTV-9VW5g/viewform?c=0&w=1">
-            <button className="cta-btn primary">Apúntate a la asociación</button>
-          </a>
-          <span>ó</span>
-          <a href="mailto:asociacion.guardianes@gmail.com">
-            <button className="cta-btn outline">
-              Contáctanos
-            </button>
-          </a>
-        </div>
-      </div>
-      <Footer />
       <style jsx>{`
-        .home {
-          color: white;
-          background: linear-gradient(120deg, #8b1f27, #c41525);
-        }
-  
-        .landing-section {
-          max-width: 1160px;
-          padding-top: 80px;
-          padding-bottom: 40px;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          align-items: center;
-          flex-wrap: wrap;
+        main {
           min-height: 100vh;
+          display: grid;
+          grid-template-rows: auto 1fr auto;
         }
-  
-        header {
-          text-align: center;
+
+        nav {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
         }
-  
-        header .title {
-          margin: 0;
-          width: 100%;
-          line-height: 1.15;
-          font-size: 48px;
-        }
-  
-        header .description {
-          font-size: 24px;
-          margin: 0;
-        }
-  
-        main, .site-logo {
-          flex: 1 1 auto;
+
+        nav .site-logo {
           padding: 1rem;
-          max-width: 50%;
+          height: 92px;
+        }
+
+        nav header {
+          margin-top: 6px;
+          flex-grow: 1;
         }
   
+        nav header .title {
+          line-height: 1.15;
+          font-size: 42px;
+          margin: 0;
+        }
+  
+        nav header .subtitle {
+          font-size: 20px;
+          margin: 0;
+        }
+
+        :global(nav .social) {
+          margin-top: 8px;
+          margin-right: 16px;
+        }
+
+        :global(.section-icons.right) {
+          max-width: min(100vw, 628px);
+        }
+
+        .description {
+          max-width: 628px;
+          margin: 0 24px;
+          font-size: 18px;
+          line-height: 1.66;
+        }
+
         .cta {
-          margin-top: 3rem;
-          text-align: center;
+          margin: 16px 24px;
+        }
+
+        .cta-first {
+          margin-right: 16px;
+        }
+
+        .cta-separator {
+          margin: 0 16px;
         }
   
         .cta-btn {
           font-size: 18px;
-          border-radius: 24px;
+          border-radius: 16px;
           border: none;
           padding: 12px 18px;
-          margin: 1rem;
+          margin: 8px 0;
           background-color: #f0f0f0;
           color: #ad1926;
           cursor: pointer;
@@ -113,7 +119,6 @@ const Home = () => {
         .cta-btn.primary {
           font-size: 20px;
           padding: 16px 24px;
-          border-radius: 32px;
         }
   
         .cta-btn.outline {
@@ -126,43 +131,37 @@ const Home = () => {
         .cta-btn:hover {
           opacity: 0.9;
         }
-  
-        @media (max-width: 600px) {
-          .site-logo {
-            order: 1;
-            max-width: 95vw;
-          }
-          main {
-            order: 2;
-            max-width: none;
-          }
-          .cta span {
-            display: none;
-          }
-        }
-  
-        :global(.social.social-top) {
-          position: absolute;
+
+        .carrousel {
+          z-index: -1;
+          position: fixed;
           top: 0;
-          right: .5rem;
+          right: 0;
+          max-width: 55%;
+          min-width: 300px;
+          overflow: hidden;
+          height: 100vh;
+          clip-path: polygon(0px 0%, 100% 0%, 100% 100%, 140px 100%);
         }
-  
-        .below-sections {
-          text-align: center;
+
+        .carrousel img {
+          max-width: none;
+          height: 100%;
+          object-fit: cover;
         }
-  
-        .more {
-          font-size: 48px;
-          font-style: italic;
-        }
-  
-        .more + p {
-          font-size: 24px;
-          margin-bottom: 8px;
-        }
-  
-        .below-sections .cta {
-          margin-top: 0;
+
+        @media (max-width: 812px) {
+          nav {
+            display: block;
+          }
+
+          nav header {
+            margin: 0 16px;
+          }
+
+          .carrousel {
+            min-width: 280px;
+          }
         }
       `}</style>
     </div>

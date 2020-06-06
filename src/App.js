@@ -1,6 +1,5 @@
 import React from 'react'
-import { Root, Routes, addPrefetchExcludes } from 'react-static'
-//
+import { Root, Routes } from 'react-static'
 import { Router } from '@reach/router'
 import Loading from './components/Loading'
 

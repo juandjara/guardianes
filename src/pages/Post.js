@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import api from '../../cmsapi'
-import HeadConfig from '../components/HeadConfig'
 import { Link } from '@reach/router'
 import Footer from '../components/Footer'
-import { useRouteData } from 'react-static'
+import { useRouteData, useSiteData } from 'react-static'
 
 const CONTAINER_WIDTH = 812;
 
@@ -36,93 +35,93 @@ function PostsHeader ({ sections, currentSection }) {
       </nav>
       <section className="container section-description">
         <h1>{currentSection.titulo}</h1>
-        <div className="html-content" dangerouslySetInnerHTML={{ __html: currentSection.descripcion }}></div>
+        <div className="item-html" dangerouslySetInnerHTML={{ __html: currentSection.descripcion }}></div>
       </section>
       <style jsx>{`
-header {
-  color: white;
-  background: linear-gradient(120deg, #8b1f27, #c41525);
-  padding-bottom: 32px;
-}
+        header {
+          color: white;
+          background: linear-gradient(120deg, #8b1f27, #c41525);
+          padding-bottom: 32px;
+        }
 
-nav {
-  padding: 1rem;
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
+        nav {
+          padding: 1rem;
+          display: flex;
+          align-items: flex-start;
+          flex-wrap: wrap;
+        }
 
-:global(nav a) {
-  text-decoration: none;
-  color: white;
-}
+        :global(nav a) {
+          text-decoration: none;
+          color: white;
+        }
 
-:global(nav a.nav-root) {
-  align-items: center;
-  margin-bottom: 24px;
-  display: flex;
-}
+        :global(nav a.nav-root) {
+          align-items: center;
+          margin-bottom: 24px;
+          display: flex;
+        }
 
-nav ul {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
-}
+        nav ul {
+          display: flex;
+          flex-grow: 1;
+          justify-content: flex-end;
+        }
 
-:global(nav ul a) {
-  display: block;
-}
+        :global(nav ul a) {
+          display: block;
+        }
 
-@media (max-width: ${CONTAINER_WIDTH}px) {
-  nav ul {
-    justify-content: center;
-  }
-}
+        @media (max-width: ${CONTAINER_WIDTH}px) {
+          nav ul {
+            justify-content: center;
+          }
+        }
 
-nav ul li {
-  padding-bottom: 8px;
-  border-bottom: 3px solid transparent;
-  margin: 0 8px;
-  text-align: center;
-}
+        nav ul li {
+          padding-bottom: 8px;
+          border-bottom: 3px solid transparent;
+          margin: 0 8px;
+          text-align: center;
+        }
 
-nav ul li p {
-  margin: 0;
-}
+        nav ul li p {
+          margin: 0;
+        }
 
-nav ul img {
-  height: 45px;
-}
+        nav ul img {
+          height: 45px;
+        }
 
-nav ul li:hover,
-nav ul li.selected {
-  border-bottom-color: white;
-}
+        nav ul li:hover,
+        nav ul li.selected {
+          border-bottom-color: white;
+        }
 
-:global(.nav-root h1) {
-  font-size: 2rem;
-  margin: 0;
-}
+        :global(.nav-root h1) {
+          font-size: 2rem;
+          margin: 0;
+        }
 
-.site-logo {
-  height: 60px;
-  margin-right: 1rem;
-}
+        .site-logo {
+          height: 60px;
+          margin-right: 1rem;
+        }
 
-.container {
-  max-width: ${CONTAINER_WIDTH}px;
-  padding: 0 16px;
-  margin: 0 auto;
-}
+        .container {
+          max-width: ${CONTAINER_WIDTH}px;
+          padding: 0 16px;
+          margin: 0 auto;
+        }
 
-.section-description h1 {
-  font-size: 4rem;
-  margin: 16px 0;
-}
+        .section-description h1 {
+          font-size: 4rem;
+          margin: 16px 0;
+        }
 
-.section-description .html-content {
-  font-size: 20px;
-}
+        .section-description .item-html {
+          font-size: 20px;
+        }
       `}</style>
     </header>
   )
@@ -178,13 +177,12 @@ function Posts () {
   useEffect(() => {
     document.documentElement.scrollTop = 0
   }, [])
-  const { sections = [], currentSection = {}, posts = [] } = useRouteData()
-  const groupedPosts = groupPosts(posts)
+  const { section, sectionsInfo } = useRouteData()
+  const groupedPosts = groupPosts(section.items)
   return (
     <div className="page">
-      <HeadConfig />
-      <PostsHeader sections={sections} currentSection={currentSection} />
-      <div className={posts.length ? 'posts container card' : 'posts container'}>
+      <PostsHeader sections={sectionsInfo} currentSection={section} />
+      <div className={section.items.length ? 'posts container card' : 'posts container'}>
         {groupedPosts.map(g => (
           <ul key={g.seccion}>
             <h2>{g.seccion}</h2>
@@ -193,7 +191,7 @@ function Posts () {
                 <div>
                   <h3>{p.titulo}</h3>
                   <p className="tags">{p.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}</p>
-                  <div className="html-content" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
+                  <div className="item-html" dangerouslySetInnerHTML={{ __html: p.descripcion }}></div>
                   <p className="icons">
                     {(p.informacion || []).map(i => (
                       <span key={i.icono}>
@@ -212,96 +210,96 @@ function Posts () {
       </div>
       <Footer></Footer>
       <style jsx>{`
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f8f8f8;
-}
+        .page {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          background-color: #f8f8f8;
+        }
 
-.container {
-  max-width: ${CONTAINER_WIDTH}px;
-  padding: 0 16px;
-  margin: 0 auto;
-}
+        .container {
+          max-width: ${CONTAINER_WIDTH}px;
+          padding: 0 16px;
+          margin: 0 auto;
+        }
 
-@media (min-width: ${CONTAINER_WIDTH}px) {
-  .card {
-    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    background-color: white;
-  }
+        @media (min-width: ${CONTAINER_WIDTH}px) {
+          .card {
+            box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            background-color: white;
+          }
 
-  .posts {
-    margin-top: -24px;
-  }
-}
+          .posts {
+            margin-top: -24px;
+          }
+        }
 
-.posts {
-  flex-grow: 1;
-  position: relative;
-}
+        .posts {
+          flex-grow: 1;
+          position: relative;
+        }
 
-.posts h2 {
-  font-size: 30px;
-}
+        .posts h2 {
+          font-size: 30px;
+        }
 
-.post {
-  min-width: 320px;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
+        .post {
+          min-width: 320px;
+          margin-bottom: 32px;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+        }
 
-.post h3 {
-  font-size: 20px;
-  margin-top: 0;
-}
+        .post h3 {
+          font-size: 20px;
+          margin-top: 0;
+        }
 
-.post .html-content {
-  line-height: 1.6;
-}
+        .post .item-html {
+          line-height: 1.6;
+        }
 
-.post img {
-  flex: 0 0 auto;
-  margin-left: 8;
-  border-radius: 4;
-  display: block;
-}
+        .post img {
+          flex: 0 0 auto;
+          margin-left: 8;
+          border-radius: 4;
+          display: block;
+        }
 
-@media (max-width: ${CONTAINER_WIDTH}px) {
-  .post {
-    flex-direction: column-reverse;
-  }
-  .post img {
-    margin: 8px auto;
-  }
-}
+        @media (max-width: ${CONTAINER_WIDTH}px) {
+          .post {
+            flex-direction: column-reverse;
+          }
+          .post img {
+            margin: 8px auto;
+          }
+        }
 
-.tags span {
-  background-color: #eee;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
+        .tags span {
+          background-color: #eee;
+          padding: 4px 8px;
+          border-radius: 4px;
+        }
 
-.tags span + span {
-  margin-left: 8px;
-}
+        .tags span + span {
+          margin-left: 8px;
+        }
 
-.icons {
-  font-size: 14px;
-}
+        .icons {
+          font-size: 14px;
+        }
 
-.icons > span {
-  margin-right: 12px;
-}
+        .icons > span {
+          margin-right: 12px;
+        }
 
-.icons .material-icons {
-  vertical-align: bottom;
-  display: inline-block;
-  margin-right: 4px;
-}
+        .icons .material-icons {
+          vertical-align: bottom;
+          display: inline-block;
+          margin-right: 4px;
+        }
       `}</style>
     </div>
   )

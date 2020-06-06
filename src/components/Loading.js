@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Loading = () => (
-  <div style={{
+  <div className="loading" style={{
     fontFamily: 'sans-serif', padding: '2rem', textAlign: 'center'
   }}>
     <p style={{marginBottom: 8, fontSize: '1.4rem'}}>

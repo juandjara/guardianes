@@ -17,8 +17,10 @@ const Social = ({ className }) => (
       }
 
       @media (max-width: 812px) {
-        .social img {
-          width: 1rem;
+        .social {
+          position: absolute;
+          top: 0;
+          right: 4px;
         }
       }
     `}</style>
