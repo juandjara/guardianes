@@ -49,6 +49,10 @@ const Home = () => {
           grid-template-rows: auto 1fr auto;
         }
 
+        .display-font {
+          font-family: Bree Serif, serif;
+        }
+
         nav {
           display: flex;
           align-items: flex-start;

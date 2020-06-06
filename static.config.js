@@ -1,6 +1,7 @@
 import React from 'react'
-import api from './cmsapi'
 import axios from 'axios'
+import api from './cmsapi'
+import GlobalStyle from './src/components/GlobalStyle'
 
 const igTokenUrl = 'https://guardianes-instagram-tokenizer.herokuapp.com/token.json'
 
@@ -12,7 +13,6 @@ async function getInstagramPhotos () {
 }
 
 export default {
-  siteRoot: 'https://asoguardianes.com',
   Document: ({
     Html,
     Head,
@@ -27,36 +27,6 @@ export default {
         <link rel='icon' type='image/png' href='/images/escudo-fullcolor.png'/>
         <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-        <style>{`
-          body {
-            margin: 0;
-            color: white;
-            background: linear-gradient(80deg, #c41525 15%, #8b1f27 50%);
-            min-height: 100vh;
-            font-family: Roboto, -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
-          }
-          html, body {
-            scroll-behavior: smooth;
-          }
-          .display-font {
-            font-family: Bree Serif, serif;
-          }
-          * {
-            box-sizing: border-box;
-          }
-          img {
-            max-width: 100%;
-            object-fit: contain;
-          }
-          ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-          }
-          .item-html {
-            line-height: 1.5;
-          }
-        `}</style>
       </Head>
       <Body>{children}</Body>
     </Html>
@@ -93,8 +63,10 @@ export default {
       }))
     ]
   },
+  siteRoot: 'https://asoguardianes.com',
   plugins: [
-    require.resolve('react-static-plugin-reach-router'),
-    require.resolve('react-static-plugin-sitemap')
+    'react-static-plugin-styled-components',
+    'react-static-plugin-reach-router',
+    'react-static-plugin-sitemap'
   ]
 }
