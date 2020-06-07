@@ -106,7 +106,7 @@ const HomeStyles = styled.div`
     max-width: 55%;
     min-width: 280px;
     overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
     clip-path: polygon(0px 0%, 100% 0%, 100% 100%, 140px 100%);
   }
 
