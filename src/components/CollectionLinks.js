@@ -18,7 +18,7 @@ const CollectionLinksStyles = styled.ul`
       display: block;
     }
 
-    &:hover, .selected {
+    &:hover, &.selected {
       border-bottom-color: white;
     }
 
@@ -31,10 +31,10 @@ const CollectionLinksStyles = styled.ul`
 export default function CollectionLinks ({ collectionsInfo, collection }) {
   return (
     <CollectionLinksStyles className="collection-links">
-      {collectionsInfo.map(s => (
-        <li key={s.id} className={`collection-links-item ${s.id === collection.id ? 'selected' : ''}`}>
-          <Link to={`/${s.id}`}>
-            <img src={s.icono && api.makeImageUrl(s.icono, 'thumbnail')} />
+      {collectionsInfo.map(c => (
+        <li key={c.coleccion} className={`collection-links-item ${c.coleccion === collection.coleccion ? 'selected' : ''}`}>
+          <Link to={`/${c.coleccion}`}>
+            <img src={c.icono && api.makeImageUrl(c.icono, 'thumbnail')} />
           </Link>
         </li>
       ))}

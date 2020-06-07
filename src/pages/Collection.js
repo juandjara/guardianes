@@ -3,72 +3,57 @@ import api from '../../cmsapi'
 import { Link } from '@reach/router'
 import { useRouteData, useSiteData } from 'react-static'
 import CollectionLinks from '../components/CollectionLinks'
+import CategoriesMenu from '../components/CategoriesMenu'
+import Post from '../components/Post'
 import styled from 'styled-components'
 
-const CONTAINER_WIDTH = 812;
+const MOBILE_BREAKPOINT = 812;
 
 function groupPosts (posts) {
   const reduced = posts.reduce((acum, elem) => {
-    acum[elem.seccion] = acum[elem.seccion] || { seccion: elem.seccion, posts: [] }
-    acum[elem.seccion].posts = acum[elem.seccion].posts.concat(elem)
+    acum[elem.categoria] = acum[elem.categoria] || { categoria: elem.categoria, posts: [] }
+    acum[elem.categoria].posts = acum[elem.categoria].posts.concat(elem)
     return acum
   }, {})
   return Object.values(reduced)
 }
 
-const FixedMenuStyles = styled.section`
-  position: absolute;
-  top: 24px;
-  left: 100%;
-  width: 100%;
-  max-width: 240px;
-  padding: 0 16px;
-
-  @media (max-width: 1140px) {
-    display: none;
-  }
-
-  h2 {
-    margin-bottom: 12px;
-    margin-top: 2rem;
-  }
-
-  li {
-    margin-bottom: 8px;
-  }
-`
-
-function FixedMenu ({ groupedPosts }) {
-  return (
-    <FixedMenuStyles className="fixed-menu">
-      {groupedPosts.map(g => (
-        <ul key={g.seccion}>
-          <h2>{g.seccion}</h2>
-          {g.posts.map(p => (
-            <li key={p.id}>
-              <a href={`#${p.id}`}>{p.titulo}</a>
-            </li>
-          ))}
-        </ul>
-      ))}
-    </FixedMenuStyles>
-  )
-}
-
 const CollectionStyles = styled.div`
   min-height: 100vh;
-  ${props => props.background ? `
-    background-image: url('${props.background}');
+
+  .background-image {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(${props => props.background});
     background-size: cover;
-  ` : ''}
+    background-position: 25% 0%;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient);
+      opacity: 0.75;
+    }
+  }
 
   .container {
-    max-width: ${CONTAINER_WIDTH}px;
+    max-width: 1160px;
+    margin: 0 auto;
     padding: 0 16px;
   }
 
   .html-content {
     line-height: 1.6;
+    max-width: 812px;
   }
 
   .collection-nav {
@@ -78,60 +63,73 @@ const CollectionStyles = styled.div`
     flex-wrap: wrap;
 
     .nav-header {
-      align-items: center;
       display: flex;
-
-      .nav-logo {
-        height: 60px;
-        margin-right: 1rem;
-      }
-
-      .nav-title {
-        font-family: var(--family-serif), serif;
-        line-height: 1.15;
-        font-size: 42px;
-        margin: 0;
-      }
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-bottom: 16px;
     }    
   }
 
+  .nav-logo {
+    height: 60px;
+    margin-right: 1rem;
+  }
+
+  .nav-title {
+    font-family: var(--family-serif), serif;
+    line-height: 1.15;
+    font-size: 2rem;
+    margin-top: 8px;
+  }
+
   .collection-header {
+    margin-top: 24px;
+    margin-bottom: 48px;
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+
+    .collection-icon {
+      height: 120px;
+      margin-right: 12px;
+    }
+
     h1 {
-      font-size: 4rem;
+      font-size: 3rem;
       margin: 16px 0;
     }
 
     .html-content {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 
-  .posts-list {
-    flex-grow: 1;
+  .collection-posts {
     position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 
-    h2 {
-      font-size: 30px;
+    max-width: 1160px;
+    padding: 0 16px;
+
+    .collection-posts-list {
+      flex-grow: 1;
+      flex-basis: 0%;
+
+      .category-title {
+        font-size: 30px;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
     }
 
-    .post {
-      min-width: 320px;
-      margin-bottom: 32px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      h3 {
-        font-size: 20px;
-        margin-top: 0;
-      }
-
-      img {
-        flex: 0 0 auto;
-        margin-left: 8;
-        border-radius: 4px;
-        display: block;
-      }
+    .categories-menu {
+      flex-grow: 1;
     }
   }
 
@@ -147,7 +145,7 @@ const CollectionStyles = styled.div`
     }
   }
 
-  @media (max-width: ${CONTAINER_WIDTH}px) {
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
     .card {
       box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.2);
       border-radius: 8px;
@@ -158,34 +156,27 @@ const CollectionStyles = styled.div`
       justify-content: center;
     }
 
+    .collection-header header {
+      align-items: center;
+
+      .collection-icon {
+        height: 80px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
     .posts-list {
       margin-top: -24px;
-
-      .post {
-        flex-direction: column-reverse;
-
-        img {
-          margin: 8px auto;
-        }
-      }
     }    
+
+    .nav-title {
+      margin: 0;
+    }
   }
 `
-
-function Post ({ post }) {
-  return (
-    <li className="post" id={post.id}>
-      <div>
-        <h3>{post.titulo}</h3>
-        <p className="tags">
-          {post.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}
-        </p>
-        <div className="html-content" dangerouslySetInnerHTML={{ __html: post.descripcion }}></div>
-      </div>
-      <img src={post.imagen && api.makeImageUrl(post.imagen, 'thumbnail')} />
-    </li>
-  )
-}
 
 export default function Collection () {
   const homeData = useSiteData()
@@ -195,27 +186,33 @@ export default function Collection () {
 
   return (
     <CollectionStyles className="page" background={background}>
+      <div className="background-image"></div>
       <section>
         <nav className="collection-nav">
           <Link className="nav-header" to="/">
-            <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
+            <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="escudo guardianes blanco" />
             <h1 className="nav-title">{homeData.titulo}</h1>
           </Link>
           <CollectionLinks collectionsInfo={collectionsInfo} collection={collection} />
         </nav>
-        <header className="collection-header container">
-          <h1>{collection.titulo}</h1>
+        <div className="collection-header container">
+          <header>
+            <img className="collection-icon" src={collection.icono && api.makeImageUrl(collection.icono, 'thumbnail')} alt="icono" />
+            <h1>{collection.titulo}</h1>
+          </header>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.descripcion }}></div>
-        </header>
+        </div>
       </section>
-      <section className={collection.items.length ? 'collection-posts container card' : 'collection-posts container'}>
-        {groupedPosts.map(g => (
-          <ul key={g.seccion}>
-            <h2>{g.seccion}</h2>
-            {g.posts.map(p => <Post post={p} key={p.id} /> )}
-          </ul>
-        ))}
-        <FixedMenu groupedPosts={groupedPosts} />
+      <section className="collection-posts">
+        <div className="collection-posts-list">
+          {groupedPosts.map(g => (
+            <ul className="category-posts" key={g.categoria}>
+              <h2 className="category-title">{g.categoria}</h2>
+              {g.posts.map(p => <Post post={p} key={p.id} /> )}
+            </ul>
+          ))}
+        </div>
+        <CategoriesMenu groupedPosts={groupedPosts} />
       </section>
     </CollectionStyles>
   )
