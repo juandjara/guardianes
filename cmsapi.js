@@ -17,13 +17,10 @@ export default {
   getSiteData () {
     return this.getItems('sobre_la_asociacion', { single: 1 })
   },
-  getSectionsInfo () {
+  getCollectionsInfo () {
     return this.getItems('info_grupos', { fields: 'id,titulo,descripcion,coleccion,icono.*,imagen.*' })
   },
-  getSection (section) {
-    return this.getItems('info_grupos', { 'filter[coleccion]': section, single: 1, fields: 'id,titulo,descripcion,coleccion,icono.*,imagen.*' })
-  },
-  getSectionItems (section) {
+  getCollectionItems (section) {
     return this.getItems(section, { fields: '*,imagen.*' })
   }
 }

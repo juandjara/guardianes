@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import api from './cmsapi'
-import GlobalStyle from './src/components/GlobalStyle'
 
 const igTokenUrl = 'https://guardianes-instagram-tokenizer.herokuapp.com/token.json'
 
@@ -40,10 +39,10 @@ export default {
   },
   getRoutes: async () => {
     const photos = await getInstagramPhotos()
-    const sectionsInfo = await api.getSectionsInfo()
-    for (const section of sectionsInfo) {
-      const items = await api.getSectionItems(section.coleccion)
-      section.items = items
+    const collectionsInfo = await api.getCollectionsInfo()
+    for (const collection of collectionsInfo) {
+      const items = await api.getCollectionItems(collection.coleccion)
+      collection.items = items
     }
 
     return [
@@ -54,12 +53,12 @@ export default {
       {
         path: '/',
         template: 'src/pages/Home',
-        getData: () => ({ photos, sectionsInfo })
+        getData: () => ({ photos, collectionsInfo })
       },
-      ...sectionsInfo.map(section => ({
-        path: `/${section.coleccion}`,
-        template: 'src/pages/Post',
-        getData: () => ({ section, sectionsInfo })
+      ...collectionsInfo.map(collection => ({
+        path: `/${collection.coleccion}`,
+        template: 'src/pages/Collection',
+        getData: () => ({ collection, collectionsInfo })
       }))
     ]
   },

@@ -129,7 +129,7 @@ const HomeStyles = styled.div`
 
 const Home = () => {
   const homeData = useSiteData()
-  const { photos, sectionsInfo } = useRouteData() 
+  const { photos, collectionsInfo } = useRouteData() 
   const firstImg = photos.data.filter(img => (
     img.media_type === 'IMAGE'
   ))[4].media_url
@@ -145,7 +145,7 @@ const Home = () => {
           </header>
           <Social />
         </nav>
-        <SectionIcons pages={sectionsInfo} className="right" />
+        <SectionIcons pages={collectionsInfo} className="right" />
         <section className="copy">
           <div className="description" dangerouslySetInnerHTML={{ __html: homeData.descripcion }}></div>  
           <p className="cta">

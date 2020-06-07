@@ -22,17 +22,8 @@ const SectionIconsStyles = styled.ul`
     transition: opacity 0.25s ease;
   }
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
   li:hover img {
     opacity: 0.75;
-  }
-
-  li:hover a {
-    text-decoration: underline;
   }
 
   img {

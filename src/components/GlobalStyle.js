@@ -1,12 +1,18 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --gradient: linear-gradient(80deg, #c41525 15%, #8b1f27 50%);
+    --family-sans: 'Roboto';
+    --family-serif: 'Bree Serif'
+  }
+
   body {
     margin: 0;
     color: white;
-    background: linear-gradient(80deg, #c41525 15%, #8b1f27 50%);
+    background: var(--gradient);
     min-height: 100vh;
-    font-family: Roboto, -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
+    font-family: var(--family-sans), -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
   }
 
   html, body {
@@ -15,6 +21,15 @@ const GlobalStyle = createGlobalStyle`
   
   * {
     box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   img {
