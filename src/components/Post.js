@@ -10,6 +10,26 @@ const PostStyles = styled.li`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  position: relative;
+  padding: 8px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.25;
+    z-index: -1;
+    border-radius: 8px;
+  }
+
+  .post-content {
+    padding: 8px;
+  }
 
   h3 {
     font-size: 20px;
@@ -35,7 +55,7 @@ const PostStyles = styled.li`
 export default function Post ({ post }) {
   return (
     <PostStyles className="post" id={post.id}>
-      <div>
+      <div className="post-content">
         <h3>{post.titulo}</h3>
         <p className="tags">
           {post.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}

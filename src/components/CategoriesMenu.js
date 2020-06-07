@@ -7,13 +7,14 @@ const CategoriesMenuStyles = styled.section`
   margin-top: 3rem;
   margin-left: 16px;
   position: sticky;
-  top: 20px;
+  top: 0px;
 
-  @media (max-width: 1140px) {
+  @media (max-width: 912px) {
     display: none;
   }
 
   h3 {
+    margin-top: 2rem;
     margin-bottom: 12px;
     font-size: 22px;
   }

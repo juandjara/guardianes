@@ -84,7 +84,7 @@ const CollectionStyles = styled.div`
 
   .collection-header {
     margin-top: 24px;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 
     header {
       display: flex;

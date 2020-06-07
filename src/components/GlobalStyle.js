@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   :root {
+    --light-red: #c41525;
+    --dark-red: #8b1f27;
     --gradient: linear-gradient(80deg, #c41525 15%, #8b1f27 50%);
     --family-sans: 'Roboto';
     --family-serif: 'Bree Serif'
