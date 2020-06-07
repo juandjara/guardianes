@@ -1,29 +1,31 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const CONTAINER_WIDTH = 812;
+
+const SocialStyles = styled.div`
+  a {
+    padding: 12px 8px;
+    display: inline-block;
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+
+  img {
+    width: 1.5rem;
+  }
+
+  @media (max-width: ${CONTAINER_WIDTH}px) {
+    position: absolute;
+    top: 0;
+    right: 4px;
+  }
+`
 
 const Social = ({ className }) => (
-  <div className={`social ${className || ''}`}>
-    <style jsx>{`
-      .social a {
-        padding: 12px 8px;
-        display: inline-block;
-      }
-
-      .social a:hover {
-        opacity: 0.75;
-      }
-
-      .social img {
-        width: 1.5rem;
-      }
-
-      @media (max-width: 812px) {
-        .social {
-          position: absolute;
-          top: 0;
-          right: 4px;
-        }
-      }
-    `}</style>
+  <SocialStyles className={`social ${className || ''}`}>
     <a title="@asoguardianes" href="https://twitter.com/asoguardianes" target="_blank">
       <img src="/images/social-icons/twitter.svg" alt="icon" />
     </a>
@@ -39,7 +41,7 @@ const Social = ({ className }) => (
     <a title="asociacion.guardianes@gmail.com" href="mailto:asociacion.guardianes@gmail.com" target="_blank">
       <img src="/images/social-icons/mail.svg" alt="icon" />
     </a>
-  </div>
+  </SocialStyles>
 )
 
 export default Social

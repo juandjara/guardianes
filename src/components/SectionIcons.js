@@ -1,50 +1,50 @@
 import React from 'react'
 import cmsapi from '../../cmsapi'
 import { Link } from '@reach/router'
+import styled from 'styled-components'
+
+const SectionIconsStyles = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  grid-gap: 16px 8px;
+  justify-content: center;
+  align-content: center;
+  margin-top: 32px;
+  margin-bottom: 24px;
+
+  li {
+    text-align: center;
+    text-transform: uppercase;
+    box-sizing: content-box;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  li:hover img {
+    opacity: 0.75;
+  }
+
+  li:hover a {
+    text-decoration: underline;
+  }
+
+  img {
+    display: block;
+    width: 75px;
+    height: auto;
+    margin: 0 auto;
+  }
+`
 
 const SectionIcons = ({ pages, className }) => (
-  <ul className={`section-icons ${className}`}>
-    <style jsx>{`
-      .section-icons {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, 160px);
-        grid-gap: 16px 8px;
-        justify-content: center;
-        align-content: center;
-        margin-top: 32px;
-        margin-bottom: 24px;
-      }
-
-      .section-icons li {
-        text-align: center;
-        text-transform: uppercase;
-        box-sizing: content-box;
-        font-size: 18px;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: opacity 0.25s ease;
-      }
-
-      :global(.section-icons a) {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      .section-icons li:hover img {
-        opacity: 0.75;
-      }
-
-      :global(.section-icons li:hover a) {
-        text-decoration: underline;
-      }
-
-      .section-icons img {
-        display: block;
-        width: 75px;
-        height: auto;
-        margin: 0 auto;
-      }
-    `}</style>
+  <SectionIconsStyles className={`section-icons ${className}`}>
     {pages.map(p => (
       <li key={p.coleccion}>
         <Link to={`/${p.coleccion || ''}`}>
@@ -53,7 +53,7 @@ const SectionIcons = ({ pages, className }) => (
         </Link>
       </li>
     ))}
-  </ul>
+  </SectionIconsStyles>
 )
 
 export default SectionIcons

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import api from '../../cmsapi'
 import { Link } from '@reach/router'
-import Footer from '../components/Footer'
 import { useRouteData } from 'react-static'
 import styled from 'styled-components'
 
@@ -304,7 +303,6 @@ function Posts () {
         ))}
         <FixedMenu groupedPosts={groupedPosts} />
       </div>
-      <Footer></Footer>
     </PostStyles>
   )
 }
