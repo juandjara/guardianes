@@ -11,7 +11,7 @@ const HomeStyles = styled.div`
     grid-template-rows: auto 1fr auto;
   }
 
-  .display-font {
+  .nav-header {
     font-family: Bree Serif, serif;
   }
 
@@ -21,7 +21,7 @@ const HomeStyles = styled.div`
     justify-content: flex-start;
   }
 
-  nav .site-logo {
+  nav .nav-logo {
     padding: 1rem;
     height: 92px;
   }
@@ -104,7 +104,7 @@ const HomeStyles = styled.div`
     top: 0;
     right: 0;
     max-width: 55%;
-    min-width: 300px;
+    min-width: 280px;
     overflow: hidden;
     height: 100vh;
     clip-path: polygon(0px 0%, 100% 0%, 100% 100%, 140px 100%);
@@ -124,10 +124,6 @@ const HomeStyles = styled.div`
     nav header {
       margin: 0 16px;
     }
-
-    .carrousel {
-      min-width: 280px;
-    }
   }
 `
 
@@ -142,8 +138,8 @@ const Home = () => {
     <HomeStyles className="home">
       <main>
         <nav>
-          <img className="site-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
-          <header className="display-font">
+          <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
+          <header className="nav-header">
             <h1 className="title"> {homeData.titulo} </h1>
             <p className="subtitle"> {homeData.subtitulo} </p>
           </header>
