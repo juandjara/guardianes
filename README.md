@@ -3,7 +3,8 @@
 Stack tecnológico
 * Front-end
   * React-Static
-  * Styled JSX
+  * Reach Router
+  * Styled-Components
 
 * Back-end
   * Directus CMS
