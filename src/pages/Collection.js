@@ -107,6 +107,10 @@ const CollectionStyles = styled.div`
     }
   }
 
+  .collection-info {
+    overflow: hidden;
+  }
+
   .collection-posts {
     position: relative;
     margin: 0 auto;
@@ -130,18 +134,6 @@ const CollectionStyles = styled.div`
 
     .categories-menu {
       flex-grow: 1;
-    }
-  }
-
-  .tags {
-    span {
-      background-color: #eee;
-      padding: 4px 8px;
-      border-radius: 4px;
-
-      & + span {
-        margin-left: 8px;
-      }
     }
   }
 
@@ -187,7 +179,7 @@ export default function Collection () {
   return (
     <CollectionStyles className="page" background={background}>
       <div className="background-image"></div>
-      <section>
+      <section className="collection-info">
         <nav className="collection-nav">
           <Link className="nav-header" to="/">
             <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="escudo guardianes blanco" />

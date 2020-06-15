@@ -43,6 +43,18 @@ const PostStyles = styled.li`
     display: block;
   }
 
+  .tags {
+    span {
+      background-color: rgba(196, 21, 37, 0.66);
+      padding: 4px 8px;
+      border-radius: 4px;
+
+      & + span {
+        margin-left: 8px;
+      }
+    }
+  }
+
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
     flex-direction: column-reverse;
 
