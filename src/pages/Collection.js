@@ -189,7 +189,7 @@ export default function Collection () {
         </nav>
         <div className="collection-header container">
           <header>
-            <img className="collection-icon" src={collection.icono && api.makeImageUrl(collection.icono, 'thumbnail')} alt="icono" />
+            <img className="collection-icon" src={collection.icono && api.makeImageUrl(collection.icono, 'group-icon')} alt="icono" />
             <h1>{collection.titulo}</h1>
           </header>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.descripcion }}></div>

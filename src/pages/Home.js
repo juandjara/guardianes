@@ -129,10 +129,10 @@ const HomeStyles = styled.div`
 
 const Home = () => {
   const homeData = useSiteData()
-  const { photos, collectionsInfo } = useRouteData() 
-  const firstImg = photos.data.filter(img => (
-    img.media_type === 'IMAGE'
-  ))[4].media_url
+  const { collectionsInfo } = useRouteData() 
+  // const firstImg = photos.data.filter(img => (
+  //   img.media_type === 'IMAGE'
+  // ))[4].media_url
 
   return (
     <HomeStyles className="home">
@@ -140,14 +140,14 @@ const Home = () => {
         <nav>
           <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
           <header className="nav-header">
-            <h1 className="title"> {homeData.titulo} </h1>
-            <p className="subtitle"> {homeData.subtitulo} </p>
+            <h1 className="title"> {homeData.title} </h1>
+            <p className="subtitle"> {homeData.tagline} </p>
           </header>
           <Social />
         </nav>
         <SectionIcons pages={collectionsInfo} className="right" />
         <section className="copy">
-          <div className="description" dangerouslySetInnerHTML={{ __html: homeData.descripcion }}></div>  
+          <div className="description" dangerouslySetInnerHTML={{ __html: homeData.description }}></div>  
           <p className="cta">
             <strong className="cta-first">¿Quieres saber más?</strong>
             <span className="cta-inner">
@@ -165,7 +165,7 @@ const Home = () => {
         </section>
       </main>
       <div className="carrousel">
-        <img src={firstImg} />
+        {/* <img src={firstImg} /> */}
       </div>
     </HomeStyles>
   )

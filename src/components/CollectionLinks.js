@@ -56,7 +56,7 @@ export default function CollectionLinks ({ collectionsInfo, collection }) {
       {collectionsInfo.map(c => (
         <li key={c.coleccion} className={`collection-links-item ${c.coleccion === collection.coleccion ? 'selected' : ''}`}>
           <Link to={`/${c.coleccion}`}>
-            <img src={c.icono && api.makeImageUrl(c.icono, 'thumbnail')} />
+            <img src={c.icono && api.makeImageUrl(c.icono, 'group-icon')} />
             <span className="tooltip">{c.titulo}</span>
           </Link>
         </li>

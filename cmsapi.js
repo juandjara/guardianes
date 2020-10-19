@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 export default {
-  url: 'https://editor.asoguardianes.com/guardianes',
-  thumbsUrl: 'https://editor.asoguardianes.com/guardianes/assets',
+  url: 'https://editor.asoguardianes.com',
+  thumbsUrl: 'https://editor.asoguardianes.com/assets',
   async getItems(collection, params) {
     const url = `${this.url}/items/${collection}?${this._paramsToText(params)}`
     const res = await axios.get(url)
@@ -12,13 +12,13 @@ export default {
     return Object.keys(params || {}).map(key => `${key}=${params[key]}`).join('&')
   },
   makeImageUrl(file, imageFormat) {
-    return `${this.thumbsUrl}/${file.private_hash}?key=${imageFormat}`
+    return `${this.thumbsUrl}/${file}?key=${imageFormat}`
   },
   getSiteData () {
-    return this.getItems('sobre_la_asociacion', { single: 1 })
+    return this.getItems('sobre_nosotros', { single: 1 })
   },
   getCollectionsInfo () {
-    return this.getItems('info_grupos', { fields: 'id,titulo,descripcion,coleccion,icono.*,imagen.*' })
+    return this.getItems('grupos_de_trabajo', { fields: '*' })
   },
   getCollectionItems (section) {
     return this.getItems(section, { fields: '*,imagen.*' })
