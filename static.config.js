@@ -1,5 +1,5 @@
 import React from 'react'
-import api from './cmsapi'
+import api from './dataService'
 
 export default {
   Document: ({
@@ -46,7 +46,7 @@ export default {
         getData: () => ({ collectionsInfo })
       },
       ...collectionsInfo.map(collection => ({
-        path: `/${collection.id}/${collection.title}`,
+        path: dataService.collectionToLink(collection),
         template: 'src/pages/Collection',
         getData: () => ({ collection, collectionsInfo })
       }))

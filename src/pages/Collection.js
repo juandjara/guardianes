@@ -1,12 +1,12 @@
 import React from 'react'
-import api from '../../cmsapi'
+import api from '../../dataService'
 import { Link } from '@reach/router'
 import { useRouteData, useSiteData } from 'react-static'
 import CollectionLinks from '../components/CollectionLinks'
 import CategoriesMenu from '../components/CategoriesMenu'
 import Post from '../components/Post'
 import styled from 'styled-components'
-import cmsapi from '../../cmsapi'
+import dataService from '../../dataService'
 import Social from '../components/Social'
 
 const MOBILE_BREAKPOINT = 812;
@@ -205,7 +205,7 @@ export default function Collection () {
       <section className="collection-info">
         <nav className="collection-nav">
           <Link className="nav-header" to="/">
-            <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
+            <img className="nav-logo" src={dataService.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
             <h1 className="nav-title">{homeData.title}</h1>
           </Link>
           <CollectionLinks collections={collectionsInfo} selected={collection.id} />

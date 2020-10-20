@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import api from '../../cmsapi'
+import api from '../../dataService'
 
 const MOBILE_BREAKPOINT = 812;
 

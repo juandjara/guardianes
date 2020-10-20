@@ -3,7 +3,7 @@ import SectionIcons from '../components/SectionIcons'
 import Social from '../components/Social'
 import { useRouteData, useSiteData } from 'react-static'
 import styled from 'styled-components'
-import cmsapi from '../../cmsapi'
+import dataService from '../../dataService'
 
 const HomeStyles = styled.div`
   main {
@@ -136,14 +136,14 @@ const Home = () => {
     <HomeStyles className="home">
       <main>
         <nav>
-          <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
+          <img className="nav-logo" src={dataService.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
           <header className="nav-header">
             <h1 className="title"> {homeData.title} </h1>
             <p className="subtitle"> {homeData.tagline} </p>
           </header>
           <Social className="home" />
         </nav>
-        <SectionIcons pages={collectionsInfo} className="right" />
+        <SectionIcons items={collectionsInfo} className="right" />
         <section className="copy">
           <div className="description" dangerouslySetInnerHTML={{ __html: homeData.description }}></div>  
           <p className="cta">
@@ -157,7 +157,7 @@ const Home = () => {
         </section>
       </main>
       <div className="carrousel">
-        <img src={cmsapi.makeImageUrl(homeData.background_image)} />
+        <img src={dataService.makeImageUrl(homeData.background_image)} />
       </div>
     </HomeStyles>
   )

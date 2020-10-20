@@ -1,5 +1,5 @@
 import React from 'react'
-import cmsapi from '../../cmsapi'
+import dataService from '../../dataService'
 import { Link } from '@reach/router'
 import styled from 'styled-components'
 
@@ -34,13 +34,13 @@ const SectionIconsStyles = styled.ul`
   }
 `
 
-const SectionIcons = ({ pages, className }) => (
+const SectionIcons = ({ items, className }) => (
   <SectionIconsStyles className={`section-icons ${className}`}>
-    {pages.map(p => (
-      <li key={p.id}>
-        <Link to={`/${p.id}/${p.title}`}>
-          <img src={cmsapi.makeImageUrl(p.icon, 'system-small-cover')} />
-          <p>{p.title}</p>
+    {items.map(c => (
+      <li key={c.id}>
+        <Link to={dataService.collectionToLink(c)}>
+          <img src={dataService.makeImageUrl(c.icon, 'system-small-cover')} />
+          <p>{c.title}</p>
         </Link>
       </li>
     ))}
