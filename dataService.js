@@ -4,7 +4,7 @@ export default {
   url: 'https://editor.asoguardianes.com',
   thumbsUrl: 'https://editor.asoguardianes.com/assets',
   collectionToLink (c) {
-    return `/${c.id}/${c.title}`.toLowerCase()
+    return `/${c.id}/${c.title}`.toLowerCase().replace(/\s/g, '-')
   },
   paramsToText(params) {
     return Object.keys(params || {}).map(key => `${key}=${params[key]}`).join('&')
