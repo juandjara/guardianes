@@ -3,24 +3,27 @@ import axios from 'axios'
 export default {
   url: 'https://editor.asoguardianes.com',
   thumbsUrl: 'https://editor.asoguardianes.com/assets',
-  async getItems(collection, params) {
-    const url = `${this.url}/items/${collection}?${this._paramsToText(params)}`
-    const res = await axios.get(url)
-    return res.data.data
+  collectionToLink (c) {
+    return `/${c.id}/${c.title}`.toLowerCase()
   },
-  _paramsToText(params) {
+  paramsToText(params) {
     return Object.keys(params || {}).map(key => `${key}=${params[key]}`).join('&')
   },
   makeImageUrl(file, imageFormat) {
     return `${this.thumbsUrl}/${file}?${imageFormat ? `key=${imageFormat}` : ''}`
   },
-  getSiteData () {
+  async getItems(collection, params) {
+    const url = `${this.url}/items/${collection}?${this.paramsToText(params)}`
+    const res = await axios.get(url)
+    return res.data.data
+  },
+  async getSiteData () {
     return this.getItems('sobre_nosotros', { single: 1 })
   },
-  getCollectionsInfo () {
+  async getCollectionsInfo () {
     return this.getItems('grupos_de_trabajo', { sort: 'sort', fields: '*' })
   },
-  getCollectionItems () {
+  async getCollectionItems () {
     return this.getItems('actvidades', { sort: 'sort', fields: '*,subgroup.*' })
   }
 }
