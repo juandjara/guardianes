@@ -33,8 +33,8 @@ export default function CategoriesMenu ({ groupedPosts }) {
   return (
     <CategoriesMenuStyles className="categories-menu">
       {groupedPosts.map(g => (
-        <ul className="category-menu" key={g.section}>
-          <h3 className="category-title">{g.section}</h3>
+        <ul className="category-menu" key={g.subgroup}>
+          <h3 className="category-title">{g.subgroup}</h3>
           {g.posts.map(p => (
             <li key={p.id}>
               <a href={`#${p.id}`}>{p.title}</a>

@@ -32,7 +32,7 @@ export default {
     const collectionsInfo = await api.getCollectionsInfo()
     const collectionItems = await api.getCollectionItems()
     for (const collection of collectionsInfo) {
-      collection.items = collectionItems.filter(d => d.group === collection.slug)
+      collection.items = collectionItems.filter(d => d.group === collection.id)
     }
 
     return [
@@ -46,7 +46,7 @@ export default {
         getData: () => ({ collectionsInfo })
       },
       ...collectionsInfo.map(collection => ({
-        path: `/${collection.slug}`,
+        path: `/${collection.id}/${collection.title}`,
         template: 'src/pages/Collection',
         getData: () => ({ collection, collectionsInfo })
       }))

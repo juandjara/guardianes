@@ -54,10 +54,10 @@ export default function CollectionLinks ({ collections, selected }) {
   return (
     <CollectionLinksStyles className="collection-links">
       {collections.map(c => (
-        <li key={c.slug} className={`collection-links-item ${c.slug === selected ? 'selected' : ''}`}>
-          <Link to={`/${c.slug}`}>
+        <li key={c.id} className={`collection-links-item ${c.id === selected ? 'selected' : ''}`}>
+          <Link to={`/${c.id}/${c.title}`}>
             <img src={c.icon && api.makeImageUrl(c.icon)} />
-            <span className="tooltip">{c.slug}</span>
+            <span className="tooltip">{c.title}</span>
           </Link>
         </li>
       ))}

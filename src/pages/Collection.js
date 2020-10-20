@@ -10,16 +10,6 @@ import cmsapi from '../../cmsapi'
 
 const MOBILE_BREAKPOINT = 812;
 
-function groupPosts (posts) {
-  const reduced = posts.reduce((acum, elem) => {
-    const section = elem.section.id
-    acum[section] = acum[section] || { section: elem.section.name, posts: [] }
-    acum[section].posts = acum[section].posts.concat(elem)
-    return acum
-  }, {})
-  return Object.values(reduced)
-}
-
 const CollectionStyles = styled.div`
   min-height: 100vh;
 
@@ -172,6 +162,16 @@ const CollectionStyles = styled.div`
   }
 `
 
+function groupPosts (posts) {
+  const reduced = posts.reduce((acum, elem) => {
+    const subgroup = elem.subgroup.id
+    acum[subgroup] = acum[subgroup] || { subgroup: elem.subgroup.name, posts: [] }
+    acum[subgroup].posts = acum[subgroup].posts.concat(elem)
+    return acum
+  }, {})
+  return Object.values(reduced)
+}
+
 export default function Collection () {
   const homeData = useSiteData()
   const { collectionsInfo, collection } = useRouteData()
@@ -187,12 +187,12 @@ export default function Collection () {
             <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
             <h1 className="nav-title">{homeData.title}</h1>
           </Link>
-          <CollectionLinks collections={collectionsInfo} selected={collection.slug} />
+          <CollectionLinks collections={collectionsInfo} selected={collection.id} />
         </nav>
         <div className="collection-header container">
           <header>
             <img className="collection-icon" src={api.makeImageUrl(collection.icon)} alt="icono" />
-            <h1>{collection.slug}</h1>
+            <h1>{collection.title}</h1>
           </header>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.description }}></div>
         </div>
@@ -200,8 +200,8 @@ export default function Collection () {
       <section className="collection-posts">
         <div className="collection-posts-list">
           {groupedPosts.map(g => (
-            <ul className="category-posts" key={g.section}>
-              <h2 className="category-title">{g.section}</h2>
+            <ul className="category-posts" key={g.subgroup}>
+              <h2 className="category-title">{g.subgroup}</h2>
               {g.posts.map(p => <Post post={p} key={p.id} /> )}
             </ul>
           ))}

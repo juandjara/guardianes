@@ -37,10 +37,10 @@ const SectionIconsStyles = styled.ul`
 const SectionIcons = ({ pages, className }) => (
   <SectionIconsStyles className={`section-icons ${className}`}>
     {pages.map(p => (
-      <li key={p.slug}>
-        <Link to={`/${p.slug || ''}`}>
+      <li key={p.id}>
+        <Link to={`/${p.id}/${p.title}`}>
           <img src={cmsapi.makeImageUrl(p.icon, 'system-small-cover')} />
-          <p>{p.slug}</p>
+          <p>{p.title}</p>
         </Link>
       </li>
     ))}

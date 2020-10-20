@@ -21,6 +21,6 @@ export default {
     return this.getItems('grupos_de_trabajo', { sort: 'sort', fields: '*' })
   },
   getCollectionItems () {
-    return this.getItems('actvidades', { sort: 'sort', fields: '*,section.*' })
+    return this.getItems('actvidades', { sort: 'sort', fields: '*,subgroup.*' })
   }
 }
