@@ -46,7 +46,7 @@ export default {
         getData: () => ({ collectionsInfo })
       },
       ...collectionsInfo.map(collection => ({
-        path: dataService.collectionToLink(collection),
+        path: api.collectionToLink(collection),
         template: 'src/pages/Collection',
         getData: () => ({ collection, collectionsInfo })
       }))

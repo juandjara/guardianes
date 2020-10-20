@@ -1,5 +1,4 @@
 import React from 'react'
-import api from '../../dataService'
 import { Link } from '@reach/router'
 import { useRouteData, useSiteData } from 'react-static'
 import CollectionLinks from '../components/CollectionLinks'
@@ -195,7 +194,7 @@ export default function Collection () {
   const homeData = useSiteData()
   const { collectionsInfo, collection } = useRouteData()
   const groupedPosts = groupPosts(collection.items)
-  const background = collection.background && api.makeImageUrl(collection.background)
+  const background = collection.background && dataService.makeImageUrl(collection.background)
   const buildDate = new Date(homeData.lastBuilt).toLocaleDateString()
   const buildTime = new Date(homeData.lastBuilt).toLocaleTimeString()
 
@@ -212,7 +211,7 @@ export default function Collection () {
         </nav>
         <div className="collection-header container">
           <header>
-            <img className="collection-icon" src={api.makeImageUrl(collection.icon)} alt="icono" />
+            <img className="collection-icon" src={dataService.makeImageUrl(collection.icon)} alt="icono" />
             <h1>{collection.title}</h1>
           </header>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.description }}></div>
