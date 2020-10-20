@@ -141,7 +141,7 @@ const Home = () => {
             <h1 className="title"> {homeData.title} </h1>
             <p className="subtitle"> {homeData.tagline} </p>
           </header>
-          <Social />
+          <Social className="home" />
         </nav>
         <SectionIcons pages={collectionsInfo} className="right" />
         <section className="copy">

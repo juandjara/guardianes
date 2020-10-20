@@ -7,6 +7,7 @@ import CategoriesMenu from '../components/CategoriesMenu'
 import Post from '../components/Post'
 import styled from 'styled-components'
 import cmsapi from '../../cmsapi'
+import Social from '../components/Social'
 
 const MOBILE_BREAKPOINT = 812;
 
@@ -160,6 +161,24 @@ const CollectionStyles = styled.div`
       margin: 0;
     }
   }
+
+  footer {
+    margin-top: 2rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin: 1rem 0;
+      flex-basis: 50%;
+    }
+
+    .social {
+      flex-basis: 100%;
+      text-align: end;
+    }
+  }
 `
 
 function groupPosts (posts) {
@@ -177,6 +196,8 @@ export default function Collection () {
   const { collectionsInfo, collection } = useRouteData()
   const groupedPosts = groupPosts(collection.items)
   const background = collection.background && api.makeImageUrl(collection.background)
+  const buildDate = new Date(homeData.lastBuilt).toLocaleDateString()
+  const buildTime = new Date(homeData.lastBuilt).toLocaleTimeString()
 
   return (
     <CollectionStyles className="page" background={background}>
@@ -208,6 +229,10 @@ export default function Collection () {
         </div>
         <CategoriesMenu groupedPosts={groupedPosts} />
       </section>
+      <footer>
+        <p>Actualizado el {buildDate} a las {buildTime}</p>
+        <Social />
+      </footer>
     </CollectionStyles>
   )
 }

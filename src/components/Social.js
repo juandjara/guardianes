@@ -18,9 +18,11 @@ const SocialStyles = styled.div`
   }
 
   @media (max-width: ${CONTAINER_WIDTH}px) {
-    position: absolute;
-    top: 0;
-    right: 4px;
+    &.home {
+      position: absolute;
+      top: 0;
+      right: 4px;
+    }
   }
 `
 
