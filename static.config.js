@@ -30,10 +30,10 @@ export default {
   },
   getRoutes: async () => {
     const collectionsInfo = await api.getCollectionsInfo()
-    // for (const collection of collectionsInfo) {
-    //   const items = await api.getCollectionItems(collection.coleccion)
-    //   collection.items = items
-    // }
+    const collectionItems = await api.getCollectionItems()
+    for (const collection of collectionsInfo) {
+      collection.items = collectionItems.filter(d => d.group === collection.slug)
+    }
 
     return [
       {

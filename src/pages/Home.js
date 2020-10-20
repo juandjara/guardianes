@@ -130,16 +130,13 @@ const HomeStyles = styled.div`
 
 const Home = () => {
   const homeData = useSiteData()
-  const { collectionsInfo } = useRouteData() 
-  // const firstImg = photos.data.filter(img => (
-  //   img.media_type === 'IMAGE'
-  // ))[4].media_url
+  const { collectionsInfo } = useRouteData()
 
   return (
     <HomeStyles className="home">
       <main>
         <nav>
-          <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="logo" />
+          <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
           <header className="nav-header">
             <h1 className="title"> {homeData.title} </h1>
             <p className="subtitle"> {homeData.tagline} </p>
@@ -161,7 +158,6 @@ const Home = () => {
       </main>
       <div className="carrousel">
         <img src={cmsapi.makeImageUrl(homeData.background_image)} />
-        {/* <img src={firstImg} /> */}
       </div>
     </HomeStyles>
   )

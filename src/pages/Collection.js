@@ -6,13 +6,15 @@ import CollectionLinks from '../components/CollectionLinks'
 import CategoriesMenu from '../components/CategoriesMenu'
 import Post from '../components/Post'
 import styled from 'styled-components'
+import cmsapi from '../../cmsapi'
 
 const MOBILE_BREAKPOINT = 812;
 
 function groupPosts (posts) {
   const reduced = posts.reduce((acum, elem) => {
-    acum[elem.categoria] = acum[elem.categoria] || { categoria: elem.categoria, posts: [] }
-    acum[elem.categoria].posts = acum[elem.categoria].posts.concat(elem)
+    const section = elem.section.id
+    acum[section] = acum[section] || { section: elem.section.name, posts: [] }
+    acum[section].posts = acum[section].posts.concat(elem)
     return acum
   }, {})
   return Object.values(reduced)
@@ -174,7 +176,7 @@ export default function Collection () {
   const homeData = useSiteData()
   const { collectionsInfo, collection } = useRouteData()
   const groupedPosts = groupPosts(collection.items)
-  const background = api.makeImageUrl(collection.imagen, 'directus-large-crop')
+  const background = collection.image && api.makeImageUrl(collection.image, 'system-large-crop')
 
   return (
     <CollectionStyles className="page" background={background}>
@@ -182,24 +184,24 @@ export default function Collection () {
       <section className="collection-info">
         <nav className="collection-nav">
           <Link className="nav-header" to="/">
-            <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="escudo guardianes blanco" />
-            <h1 className="nav-title">{homeData.titulo}</h1>
+            <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="escudo guardianes blanco" />
+            <h1 className="nav-title">{homeData.title}</h1>
           </Link>
-          <CollectionLinks collectionsInfo={collectionsInfo} collection={collection} />
+          <CollectionLinks collections={collectionsInfo} selected={collection.slug} />
         </nav>
         <div className="collection-header container">
           <header>
-            <img className="collection-icon" src={collection.icono && api.makeImageUrl(collection.icono, 'group-icon')} alt="icono" />
-            <h1>{collection.titulo}</h1>
+            <img className="collection-icon" src={api.makeImageUrl(collection.icon)} alt="icono" />
+            <h1>{collection.slug}</h1>
           </header>
-          <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.descripcion }}></div>
+          <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.description }}></div>
         </div>
       </section>
       <section className="collection-posts">
         <div className="collection-posts-list">
           {groupedPosts.map(g => (
-            <ul className="category-posts" key={g.categoria}>
-              <h2 className="category-title">{g.categoria}</h2>
+            <ul className="category-posts" key={g.section}>
+              <h2 className="category-title">{g.section}</h2>
               {g.posts.map(p => <Post post={p} key={p.id} /> )}
             </ul>
           ))}

@@ -50,14 +50,14 @@ const CollectionLinksStyles = styled.ul`
   }
 `
 
-export default function CollectionLinks ({ collectionsInfo, collection }) {
+export default function CollectionLinks ({ collections, selected }) {
   return (
     <CollectionLinksStyles className="collection-links">
-      {collectionsInfo.map(c => (
-        <li key={c.coleccion} className={`collection-links-item ${c.coleccion === collection.coleccion ? 'selected' : ''}`}>
-          <Link to={`/${c.coleccion}`}>
-            <img src={c.icono && api.makeImageUrl(c.icono, 'group-icon')} />
-            <span className="tooltip">{c.titulo}</span>
+      {collections.map(c => (
+        <li key={c.slug} className={`collection-links-item ${c.slug === selected ? 'selected' : ''}`}>
+          <Link to={`/${c.slug}`}>
+            <img src={c.icon && api.makeImageUrl(c.icon)} />
+            <span className="tooltip">{c.slug}</span>
           </Link>
         </li>
       ))}

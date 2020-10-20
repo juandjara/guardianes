@@ -8,6 +8,7 @@ const PostStyles = styled.li`
   min-width: 320px;
   margin-bottom: 32px;
   display: flex;
+  flex-direction: column-reverse;
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
@@ -41,6 +42,8 @@ const PostStyles = styled.li`
     margin-left: 12px;
     border-radius: 4px;
     display: block;
+    margin: 8px auto;
+    max-width: 100%;
   }
 
   .tags {
@@ -55,26 +58,26 @@ const PostStyles = styled.li`
     }
   }
 
-  @media (max-width: ${MOBILE_BREAKPOINT}px) {
+  /* @media (max-width: ${MOBILE_BREAKPOINT}px) {
     flex-direction: column-reverse;
 
     img {
       margin: 8px auto;
     }
-  }
+  } */
 `
 
 export default function Post ({ post }) {
   return (
     <PostStyles className="post" id={post.id}>
       <div className="post-content">
-        <h3>{post.titulo}</h3>
+        <h3>{post.title}</h3>
         <p className="tags">
-          {post.etiquetas.map(tag => (<span key={tag}>{tag}</span>))}
+          {post.tags.map(tag => (<span key={tag}>{tag}</span>))}
         </p>
-        <div className="html-content" dangerouslySetInnerHTML={{ __html: post.descripcion }}></div>
+        <div className="html-content" dangerouslySetInnerHTML={{ __html: post.description }}></div>
       </div>
-      <img src={post.imagen && api.makeImageUrl(post.imagen, 'post')} />
+      <img src={api.makeImageUrl(post.image)} />
     </PostStyles>
   )
 }

@@ -18,9 +18,9 @@ export default {
     return this.getItems('sobre_nosotros', { single: 1 })
   },
   getCollectionsInfo () {
-    return this.getItems('grupos_de_trabajo', { fields: '*' })
+    return this.getItems('grupos_de_trabajo', { sort: 'sort', fields: '*' })
   },
-  getCollectionItems (section) {
-    return this.getItems(section, { fields: '*,imagen.*' })
+  getCollectionItems () {
+    return this.getItems('actvidades', { sort: 'sort', fields: '*,section.*' })
   }
 }
