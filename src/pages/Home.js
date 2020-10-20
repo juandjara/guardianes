@@ -3,6 +3,7 @@ import SectionIcons from '../components/SectionIcons'
 import Social from '../components/Social'
 import { useRouteData, useSiteData } from 'react-static'
 import styled from 'styled-components'
+import cmsapi from '../../cmsapi'
 
 const HomeStyles = styled.div`
   main {
@@ -138,7 +139,7 @@ const Home = () => {
     <HomeStyles className="home">
       <main>
         <nav>
-          <img className="nav-logo" src="/images/escudo-flat-blanco.png" alt="logo" />
+          <img className="nav-logo" src={cmsapi.makeImageUrl(homeData.logo)} alt="logo" />
           <header className="nav-header">
             <h1 className="title"> {homeData.title} </h1>
             <p className="subtitle"> {homeData.tagline} </p>
@@ -154,17 +155,12 @@ const Home = () => {
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSfl-4GADkcibRnVLn7jKeGfjrSvZmuHe32QWaY3YbTV-9VW5g/viewform?c=0&w=1">
                 <button className="cta-btn primary">Apúntate a la asociación</button>
               </a>
-              <span className="cta-separator">ó</span>
-              <a href="mailto:asociacion.guardianes@gmail.com">
-                <button className="cta-btn outline">
-                  Contáctanos
-                </button>
-              </a>
             </span>
           </p>
         </section>
       </main>
       <div className="carrousel">
+        <img src={cmsapi.makeImageUrl(homeData.background_image)} />
         {/* <img src={firstImg} /> */}
       </div>
     </HomeStyles>

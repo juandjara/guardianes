@@ -39,7 +39,7 @@ const SectionIcons = ({ pages, className }) => (
     {pages.map(p => (
       <li key={p.slug}>
         <Link to={`/${p.slug || ''}`}>
-          <img src={p.icon && cmsapi.makeImageUrl(p.icon, 'system-small-cover')} />
+          <img src={cmsapi.makeImageUrl(p.icon, 'system-small-cover')} />
           <p>{p.slug}</p>
         </Link>
       </li>

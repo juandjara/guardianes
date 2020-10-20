@@ -12,7 +12,7 @@ export default {
     return Object.keys(params || {}).map(key => `${key}=${params[key]}`).join('&')
   },
   makeImageUrl(file, imageFormat) {
-    return `${this.thumbsUrl}/${file}?key=${imageFormat}`
+    return `${this.thumbsUrl}/${file}?${imageFormat ? `key=${imageFormat}` : ''}`
   },
   getSiteData () {
     return this.getItems('sobre_nosotros', { single: 1 })
