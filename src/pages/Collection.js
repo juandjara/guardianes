@@ -176,7 +176,7 @@ export default function Collection () {
   const homeData = useSiteData()
   const { collectionsInfo, collection } = useRouteData()
   const groupedPosts = groupPosts(collection.items)
-  const background = collection.image && api.makeImageUrl(collection.image, 'system-large-crop')
+  const background = collection.background && api.makeImageUrl(collection.background)
 
   return (
     <CollectionStyles className="page" background={background}>
