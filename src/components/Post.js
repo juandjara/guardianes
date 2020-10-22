@@ -73,7 +73,7 @@ export default function Post ({ post }) {
       <div className="post-content">
         <h3>{post.title}</h3>
         <p className="tags">
-          {post.tags.map(tag => (<span key={tag}>{tag}</span>))}
+          {post.tags && post.tags.map(tag => (<span key={tag}>{tag}</span>))}
         </p>
         <div className="html-content" dangerouslySetInnerHTML={{ __html: post.description }}></div>
       </div>
