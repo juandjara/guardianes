@@ -77,7 +77,7 @@ export default function Post ({ post }) {
         </p>
         <div className="html-content" dangerouslySetInnerHTML={{ __html: post.description }}></div>
       </div>
-      <img src={api.makeImageUrl(post.image)} />
+      {post.image && <img src={api.makeImageUrl(post.image)} />}
     </PostStyles>
   )
 }

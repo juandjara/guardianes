@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const CategoriesMenuStyles = styled.section`
   padding: 0 16px;
-  max-width: 260px;
+  width: 260px;
   margin-top: 3rem;
   margin-left: 16px;
   position: sticky;

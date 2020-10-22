@@ -112,12 +112,13 @@ const CollectionStyles = styled.div`
     align-items: flex-start;
     justify-content: center;
 
+    width: 100%;
     max-width: 1160px;
     padding: 0 16px;
 
     .collection-posts-list {
       flex-grow: 1;
-      flex-basis: 0%;
+      flex-shrink: 1;
 
       .category-title {
         font-size: 30px;
@@ -127,7 +128,8 @@ const CollectionStyles = styled.div`
     }
 
     .categories-menu {
-      flex-grow: 1;
+      flex-grow: 0;
+      flex-shrink: 0;
     }
   }
 
