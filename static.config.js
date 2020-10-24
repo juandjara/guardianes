@@ -16,7 +16,7 @@ export default {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel='icon' type='image/png' href='/images/escudo-fullcolor.png'/>
         <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+        {/* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link> */}
       </Head>
       <Body>{children}</Body>
     </Html>
@@ -35,6 +35,8 @@ export default {
       collection.items = collectionItems.filter(d => d.group === collection.id)
     }
 
+    const tags = new Set(collectionItems.map(c => c.tags || []).flat())
+
     return [
       {
         path: '404',
@@ -49,6 +51,19 @@ export default {
         path: api.collectionToLink(collection),
         template: 'src/pages/Collection',
         getData: () => ({ collection, collectionsInfo })
+      })),
+      ...Array.from(tags).map(tag => ({
+        path: api.tagToLink(tag),
+        template: 'src/pages/Collection',
+        getData: () => {
+          const collection = {
+            title: tag,
+            description: `<p>Actividades que contienen la etiqueta <strong class="tag">${tag}</strong></p>`,
+            icon: '/images/hashtag.svg',
+            items: collectionItems.filter(d => (d.tags || []).indexOf(tag) !== -1)
+          }
+          return { collection, collectionsInfo }
+        }
       }))
     ]
   },

@@ -1,10 +1,16 @@
 import axios from 'axios'
+import slug from 'slug'
 
 export default {
   url: 'https://editor.asoguardianes.com',
   thumbsUrl: 'https://editor.asoguardianes.com/assets',
   collectionToLink (c) {
-    return `/${c.id}/${c.title}`.toLowerCase().replace(/\s/g, '-')
+    const key = slug(c.title.toLowerCase())
+    return `/${key}`
+  },
+  tagToLink (tag) {
+    const key = slug(tag.toLowerCase())
+    return `/tag/${key}`
   },
   paramsToText(params) {
     return Object.keys(params || {}).map(key => `${key}=${params[key]}`).join('&')

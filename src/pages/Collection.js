@@ -39,12 +39,6 @@ const CollectionStyles = styled.div`
     }
   }
 
-  .container {
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
-
   .html-content {
     line-height: 1.6;
     max-width: 812px;
@@ -77,8 +71,9 @@ const CollectionStyles = styled.div`
   }
 
   .collection-header {
-    margin-top: 24px;
-    margin-bottom: 32px;
+    max-width: 1160px;
+    padding: 0 16px;
+    margin: 24px auto 32px auto;
 
     header {
       display: flex;
@@ -94,6 +89,10 @@ const CollectionStyles = styled.div`
     h1 {
       font-size: 3rem;
       margin: 16px 0;
+      font-family: var(--family-serif);
+      &::first-letter {
+        text-transform: capitalize;
+      }
     }
 
     .html-content {
@@ -113,12 +112,13 @@ const CollectionStyles = styled.div`
     justify-content: center;
 
     width: 100%;
-    max-width: 1160px;
+    max-width: min(100vw, 1160px);
     padding: 0 16px;
 
     .collection-posts-list {
       flex-grow: 1;
       flex-shrink: 1;
+      max-width: calc(100vw - 16px);
 
       .category-title {
         font-size: 30px;
@@ -201,6 +201,9 @@ export default function Collection () {
   const background = collection.background && dataService.makeImageUrl(collection.background)
   const buildDate = new Date(homeData.lastBuilt).toLocaleDateString()
   const buildTime = new Date(homeData.lastBuilt).toLocaleTimeString()
+  const icon = collection.icon.indexOf('/images') !== -1
+    ? collection.icon
+    : dataService.makeImageUrl(collection.icon)
 
   return (
     <CollectionStyles className="page" background={background}>
@@ -215,7 +218,7 @@ export default function Collection () {
         </nav>
         <div className="collection-header container">
           <header>
-            <img className="collection-icon" src={dataService.makeImageUrl(collection.icon)} alt="icono" />
+            <img className="collection-icon" src={icon} alt="icono" />
             <h1>{collection.title}</h1>
           </header>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: collection.description }}></div>
