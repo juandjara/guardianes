@@ -1,5 +1,23 @@
 import axios from 'axios'
-import slug from 'slug'
+
+// taken from https://ourcodeworld.com/articles/read/255/creating-url-slugs-properly-in-javascript-including-transliteration-for-utf-8
+function slug (str) {
+  str = str.replace(/^\s+|\s+$/g, '') // trim
+  str = str.toLowerCase()
+
+  // remove accents, swap ñ for n, etc
+  const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;'
+  const to   = 'aaaaaeeeeeiiiiooooouuuunc------'
+  for (var i=0, l=from.length ; i<l ; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
+  }
+
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '-') // collapse whitespace and replace by -
+    .replace(/-+/g, '-') // collapse dashes
+
+  return str
+}
 
 export default {
   url: 'https://editor.asoguardianes.com',

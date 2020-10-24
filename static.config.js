@@ -58,10 +58,14 @@ export default {
         getData: () => {
           const collection = {
             title: tag,
-            description: `<p>Actividades que contienen la etiqueta</p>`,
+            description: `<p>Actividades que contienen la etiqueta <strong class="tag">${tag}</strong></p>`,
             icon: '/images/hashtag.svg',
             iconRaw: true,
-            items: collectionItems.filter(d => (d.tags || []).indexOf(tag) !== -1)
+            items: collectionItems.filter(d => {
+              const key = dataService.tagToLink(tag)
+              const tags = d.tags || []
+              return tags.some(tag => dataService.tagToLink(tag) === key)
+            })
           }
           return { collection, collectionsInfo }
         }
