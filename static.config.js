@@ -1,5 +1,5 @@
 import React from 'react'
-import api from './dataService'
+import dataService from './dataService'
 
 export default {
   Document: ({
@@ -22,15 +22,15 @@ export default {
     </Html>
   ),
   getSiteData: async () => {
-    const homeData = await api.getSiteData()
+    const homeData = await dataService.getSiteData()
     return {
       ...homeData,
       lastBuilt: Date.now()
     }
   },
   getRoutes: async () => {
-    const collectionsInfo = await api.getCollectionsInfo()
-    const collectionItems = await api.getCollectionItems()
+    const collectionsInfo = await dataService.getCollectionsInfo()
+    const collectionItems = await dataService.getCollectionItems()
     for (const collection of collectionsInfo) {
       collection.items = collectionItems.filter(d => d.group === collection.id)
     }
@@ -48,18 +48,19 @@ export default {
         getData: () => ({ collectionsInfo })
       },
       ...collectionsInfo.map(collection => ({
-        path: api.collectionToLink(collection),
+        path: dataService.collectionToLink(collection),
         template: 'src/pages/Collection',
         getData: () => ({ collection, collectionsInfo })
       })),
       ...Array.from(tags).map(tag => ({
-        path: api.tagToLink(tag),
+        path: dataService.tagToLink(tag),
         template: 'src/pages/Collection',
         getData: () => {
           const collection = {
             title: tag,
-            description: `<p>Actividades que contienen la etiqueta <strong class="tag">${tag}</strong></p>`,
+            description: `<p>Actividades que contienen la etiqueta</p>`,
             icon: '/images/hashtag.svg',
+            iconRaw: true,
             items: collectionItems.filter(d => (d.tags || []).indexOf(tag) !== -1)
           }
           return { collection, collectionsInfo }

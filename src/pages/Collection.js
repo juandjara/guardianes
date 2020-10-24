@@ -5,8 +5,8 @@ import CollectionLinks from '../components/CollectionLinks'
 import CategoriesMenu from '../components/CategoriesMenu'
 import Post from '../components/Post'
 import styled from 'styled-components'
-import dataService from '../../dataService'
 import Social from '../components/Social'
+import dataService from '../dataService'
 
 const MOBILE_BREAKPOINT = 812;
 

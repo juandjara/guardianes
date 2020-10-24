@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from '@reach/router'
-import api from '../../dataService'
-import dataService from '../../dataService'
+import dataService from '../dataService'
 
 const CollectionLinksStyles = styled.ul`
   display: flex;
@@ -57,7 +56,7 @@ export default function CollectionLinks ({ collections, selected }) {
       {collections.map(c => (
         <li key={c.id} className={`collection-links-item ${c.id === selected ? 'selected' : ''}`}>
           <Link to={dataService.collectionToLink(c)}>
-            <img src={c.icon && api.makeImageUrl(c.icon)} />
+            <img src={c.icon && dataService.makeImageUrl(c.icon)} />
             <span className="tooltip">{c.title}</span>
           </Link>
         </li>

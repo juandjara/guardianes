@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import api from '../../dataService'
+import dataService from '../dataService'
 import { Link } from '@reach/router'
-
-const MOBILE_BREAKPOINT = 812;
 
 const PostStyles = styled.li`
   min-width: 320px;
@@ -69,11 +67,11 @@ export default function Post ({ post }) {
       <div className="post-content">
         <h3>{post.title}</h3>
         <div className="tags">
-          {post.tags && post.tags.map(tag => (<Link className="tag" to={api.tagToLink(tag)} key={tag}>{tag}</Link>))}
+          {post.tags && post.tags.map(tag => (<Link className="tag" to={dataService.tagToLink(tag)} key={tag}>{tag}</Link>))}
         </div>
         <div className="html-content" dangerouslySetInnerHTML={{ __html: post.description }}></div>
       </div>
-      {post.image && <img src={api.makeImageUrl(post.image)} />}
+      {post.image && <img src={dataService.makeImageUrl(post.image)} />}
     </PostStyles>
   )
 }
